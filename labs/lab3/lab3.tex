@@ -4,34 +4,93 @@
 \date{\today}
 
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{dcolumn}
+\usepackage[margin=1.0in]{geometry}
 \begin{document}
 \maketitle
    
 \section{Linear mixed effects using R}
 \subsection{streams}
 
-From Lecture\_03.r
+The models fit to the streams data were fixed effect with intercept only (lm1), 
+fixed effect with no intercept (lm2) and mixed effect (lme). Summary 
+information for the mixed effects model lme1 is in Table 1. The estimates 
+for $\sigma$ and $\sigma_b$ were 14.34 and 6.08, respectively.
 
-\includegraphics[height = 5in]{fig1resids.pdf}
+% \begin{table}[htbp]
+% \centering
+% \begin{tabular}{rll}
+%   %\hline
+%  & Variance & StdDev \\ 
+%   \hline
+% (Intercept) & 205.6813 & 14.341593 \\ 
+%   Residual &  37.0136 &  6.083881 \\ 
+%    \hline
+% \end{tabular}
+% \end{table}
+
+\begin{table}[!htbp]
+\begin{center}
+\begin{tabular}{l D{.}{.}{3.5}@{} }
+%\hline
+               & \multicolumn{1}{c}{StdDev} \\
+\hline
+(Intercept)    & 14.34       \\
+Residual       & 6.08        \\
+\hline
+               & \multicolumn{1}{c}{Fixed effects} \\
+\hline
+(Intercept)    & 78.63^{***} \\
+               & (6.20)      \\
+\hline
+AIC            & 139.32      \\
+BIC            & 141.99      \\
+Log Likelihood & -66.66      \\
+Num. obs.      & 18          \\
+Num. groups    & 6           \\
+\hline
+\end{tabular}
+\caption{Summary of random and fixed effects}
+\label{table:coefficients}
+\end{center}
+\end{table}
+
+Residuals for lm1 (Fig 1) show that there is variation between streams, and so a 
+stream effect is likely needed. Variability within streams and between streams
+looks similar whether the stream effect is fixed or random (Fig 1), but with a
+fixed effect we cannot make inference for streams that were not sampled.
+
+A plot of residuals versus fitted values for the mixed effect model (Fig 2) 
+shows no outlying observations or potentially influential data points, although 
+data are limited with only 3 observations per stream.
+
+Residual analysis for the mixed effect model (Fig 3) shows no departure from
+normality (top left and top right panels), and no strong temporal pattern
+(top middle). Within-group variances are similar (bottom left). The random 
+effects show no departure from normality (bottom middle and right).
+
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[height = 5in]{fig1resids}
+  \caption{Residuals from fixed (lm) and mixed effect (lme) models}
+\end{figure}
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[height = 3.5in]{fig2fitted}
+  \caption{Observed vs fitted values for mixed effect model}
+\end{figure}
+
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[height = 4in]{fig3diagnostic}
+  \caption{Diagnostic plots for mixed effect model}
+\end{figure}
+
+
 
 \subsection{weight-length}
-
-\section{Materials and Methods}
-\subsection{The data}
-\subsubsection{NEFOP}
-Can refer to Reference document to describe processing of Observer data. Include number of hauls observed for each gear type in the time period and season under study. Describe deletion of inshore hauls in GIS.
-\subsubsection{Vessel Trip Report}
-Describe filling in of missing values and deletion of inshore hauls in GIS.
-\subsubsection{Commercial}
-Used to bump up VTR landings. Not used for NC and VA.
-\subsubsection{NCDMF}
-North Carolina Trip Ticket landings replace the landings for North Carolina in the Commercial database. Describe deletion of inshore hauls and how much was kept from Pamlico Sound. Used to bump up observer data.
-\subsubsection{VMRC}
-VMRC data replaces landings for Virginia in the Commercial database for 2003-2006 because of unreliability of nemareas in the dealer data once it went to electronic reporting.
-
-\subsection{Unit of effort}
-Describe why landings are used. Outline relationship of landings to bycatch. Explain addition of .001 to all total landings to account for 0 catch.
-
-\section{Results}
 
 \end{document}
